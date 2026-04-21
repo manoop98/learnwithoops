@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LearnWithOOPs – DevOps, Cloud, AI & ML Tutorials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#080c12;--bg2:#0d1117;--bg3:#111720;--surface:#161d28;
+  --border:#1e2c3a;--border2:#243344;
+  --accent:#38bdf8;--accent2:#34d399;--accent3:#f97316;--purple:#a78bfa;
+  --text:#dde6f0;--text2:#7fa0bc;--text3:#4a6580;
+  --tag-bg:#0c1824;--card-bg:#0d1520;
+  --font:'Outfit',sans-serif;--mono:'Fira Code',monospace;
+}
+[data-theme="light"] {
+  --bg:#f0f4f8;--bg2:#fff;--bg3:#e8eef5;--surface:#fff;
+  --border:#d0dbe8;--border2:#b8ccdd;
+  --text:#0f1f30;--text2:#3a5a78;--text3:#7a9ab8;
+  --tag-bg:#e0eaf5;--card-bg:#fff;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;overflow-x:hidden}
+
+nav{position:sticky;top:0;z-index:200;height:58px;background:rgba(8,12,18,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 clamp(1rem,4vw,2.5rem);gap:1.5rem}
+[data-theme="light"] nav{background:rgba(240,244,248,.92)}
+.logo{font-family:var(--mono);font-weight:600;font-size:1.05rem;color:var(--accent);text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:.3rem;letter-spacing:-.01em}
+.logo-sym{color:var(--text3)}
+.nav-c{display:flex;align-items:center;gap:.1rem;flex:1}
+.nav-c a{color:var(--text2);font-size:.86rem;font-weight:500;text-decoration:none;padding:.35rem .72rem;border-radius:7px;transition:color .18s,background .18s;white-space:nowrap}
+.nav-c a:hover{color:var(--text);background:var(--surface)}
+.nbadge{background:var(--accent3);color:#fff;font-size:.55rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;padding:1px 5px;vertical-align:super;margin-left:2px}
+.nav-r{display:flex;align-items:center;gap:.6rem;margin-left:auto}
+.search-pill{display:flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.3rem .8rem;color:var(--text3);font-size:.78rem;font-family:var(--font);cursor:pointer;transition:border-color .2s;white-space:nowrap}
+.search-pill:hover{border-color:var(--accent);color:var(--text2)}
+.search-pill kbd{background:var(--bg3);border:1px solid var(--border2);border-radius:4px;padding:0 5px;font-size:.68rem;font-family:var(--mono)}
+.ibtn{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.35rem .55rem;cursor:pointer;font-size:.95rem;color:var(--text2);transition:border-color .2s;line-height:1}
+.ibtn:hover{border-color:var(--accent)}
+
+.hero{position:relative;overflow:hidden;padding:clamp(3rem,8vw,5.5rem) clamp(1rem,4vw,2.5rem) clamp(3rem,6vw,4.5rem);text-align:center}
+.hglow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 65% 55% at 50% -5%,rgba(56,189,248,.13) 0%,transparent 65%),radial-gradient(ellipse 45% 35% at 15% 60%,rgba(52,211,153,.07) 0%,transparent 55%),radial-gradient(ellipse 40% 30% at 85% 50%,rgba(167,139,250,.06) 0%,transparent 55%)}
+.hdots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(56,189,248,.1) 1px,transparent 1px);background-size:28px 28px;mask-image:radial-gradient(ellipse 85% 85% at 50% 0%,black 0%,transparent 70%)}
+.hi{position:relative;z-index:1;max-width:780px;margin:0 auto}
+.badge-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.22);border-radius:100px;padding:.3rem 1rem;font-size:.73rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;animation:fadeUp .55s ease both}
+h1{font-size:clamp(2.1rem,5.5vw,4rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin-bottom:1.2rem;animation:fadeUp .55s .1s ease both}
+.grad{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.02rem;color:var(--text2);max-width:580px;margin:0 auto 2.25rem;font-weight:400;line-height:1.72;animation:fadeUp .55s .2s ease both}
+.cta-r{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .55s .3s ease both}
+.btn-p{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06111a;font-weight:700;font-size:.88rem;padding:.68rem 1.65rem;border-radius:9px;text-decoration:none;border:none;cursor:pointer;transition:opacity .2s,transform .2s}
+.btn-p:hover{opacity:.85;transform:translateY(-1px)}
+.btn-o{background:transparent;border:1px solid var(--border2);color:var(--text);font-weight:600;font-size:.88rem;padding:.68rem 1.65rem;border-radius:9px;text-decoration:none;transition:border-color .2s,transform .2s}
+.btn-o:hover{border-color:var(--accent);transform:translateY(-1px)}
+.stats{display:flex;align-items:center;justify-content:center;gap:clamp(1.5rem,4vw,3rem);flex-wrap:wrap;margin-top:3.5rem;animation:fadeUp .55s .4s ease both}
+.stat{text-align:center}
+.sn{font-family:var(--mono);font-size:2rem;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.sl{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-top:.25rem}
+.vd{width:1px;height:36px;background:var(--border)}
+
+.sec{max-width:1100px;margin:0 auto;padding:3.5rem clamp(1rem,4vw,2.5rem)}
+.slbl{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);font-weight:700;margin-bottom:1rem}
+.sh{font-size:1.55rem;font-weight:700;letter-spacing:-.015em;margin-bottom:.4rem}
+hr.dv{border:none;border-top:1px solid var(--border);margin:0 clamp(1rem,4vw,2.5rem)}
+
+.chips{display:flex;flex-wrap:wrap;gap:.55rem}
+.chip{display:inline-flex;align-items:center;gap:.4rem;background:var(--tag-bg);border:1px solid var(--border);border-radius:8px;padding:.45rem .95rem;font-size:.84rem;color:var(--text2);text-decoration:none;font-weight:500;transition:all .18s;cursor:pointer}
+.chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(56,189,248,.06)}
+
+.tip-wrap{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.6rem 1.8rem;position:relative;overflow:hidden}
+.tip-wrap::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),var(--accent2));border-radius:3px 0 0 3px}
+.ttop{display:flex;align-items:center;gap:.75rem;margin-bottom:.8rem;font-size:.75rem;color:var(--text3)}
+.tlbl{background:rgba(56,189,248,.1);color:var(--accent);border-radius:5px;padding:.15rem .6rem;font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em}
+.tbody{color:var(--text);font-size:.94rem;line-height:1.7;margin-bottom:1rem}
+.cbox{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:.85rem 1.1rem;font-family:var(--mono);font-size:.8rem;line-height:1.75;color:#93c5fd;overflow-x:auto}
+.kw{color:#c084fc}.cls{color:#86efac}.fn{color:#7dd3fc}.cm{color:#4a6580}.str{color:#fbbf24}
+.tbar{display:flex;align-items:center;gap:.75rem;margin-top:1.1rem}
+.smbtn{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:.3rem .8rem;font-size:.76rem;color:var(--text2);cursor:pointer;font-family:var(--font);font-weight:500;transition:border-color .2s,color .2s}
+.smbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tcnt{margin-left:auto;font-size:.75rem;color:var(--text3)}
+
+.fg{display:grid;grid-template-columns:1fr;gap:1.25rem}
+@media(min-width:700px){.fg{grid-template-columns:1.65fr 1fr}}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:1.65rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:border-color .2s,transform .2s,background .2s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);background:var(--surface)}
+.ctags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.9rem}
+.ct{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:.18rem .55rem;border-radius:5px;background:var(--tag-bg);color:var(--text3);border:1px solid var(--border)}
+.ct.sky{background:rgba(56,189,248,.1);color:var(--accent);border-color:rgba(56,189,248,.22)}
+.ct.grn{background:rgba(52,211,153,.1);color:var(--accent2);border-color:rgba(52,211,153,.22)}
+.ct.ora{background:rgba(249,115,22,.1);color:var(--accent3);border-color:rgba(249,115,22,.22)}
+.ct.pur{background:rgba(167,139,250,.1);color:var(--purple);border-color:rgba(167,139,250,.22)}
+.nbdg{display:inline-flex;align-items:center;gap:.3rem;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.2);color:var(--accent);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;border-radius:5px;padding:.18rem .6rem;margin-bottom:.9rem;width:fit-content}
+.ct-t{font-size:1.18rem;font-weight:700;line-height:1.35;letter-spacing:-.01em;margin-bottom:.7rem}
+.ct-t.lg{font-size:1.4rem}
+.ct-d{font-size:.875rem;color:var(--text2);line-height:1.68;flex:1}
+.cf{display:flex;align-items:center;gap:.65rem;margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.76rem;color:var(--text3)}
+.av{width:22px;height:22px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;color:#06111a}
+.sp{color:var(--border2)}
+.rl{margin-left:auto;color:var(--accent2);font-weight:600;font-size:.79rem}
+.ss{display:flex;flex-direction:column;gap:1.25rem}
+
+.al{display:flex;flex-direction:column}
+.art{padding:1.35rem 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:.5rem;text-decoration:none;color:inherit;transition:color .18s}
+.art:hover .at{color:var(--accent)}
+.art:last-child{border-bottom:none}
+.at{font-size:1.02rem;font-weight:700;line-height:1.4;letter-spacing:-.005em;transition:color .18s}
+.ad{font-size:.86rem;color:var(--text2);line-height:1.62}
+.am{display:flex;align-items:center;gap:.6rem;font-size:.75rem;color:var(--text3)}
+.go{color:var(--accent2);font-weight:600}
+
+.tracker{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:2.25rem 2rem;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:1.1rem}
+.tracker::after{content:'{ $ }';font-family:var(--mono);position:absolute;right:2rem;top:50%;transform:translateY(-50%);font-size:5.5rem;font-weight:700;color:rgba(56,189,248,.04);pointer-events:none;white-space:nowrap;letter-spacing:-.05em}
+.tracker h3{font-size:1.5rem;font-weight:700;letter-spacing:-.015em}
+.tracker p{font-size:.88rem;color:var(--text2);max-width:480px;line-height:1.65}
+.pr{display:flex;flex-wrap:wrap;gap:.5rem}
+.pl{background:var(--tag-bg);border:1px solid var(--border);border-radius:8px;padding:.42rem .88rem;font-size:.82rem;color:var(--text2);cursor:pointer;font-weight:500;transition:all .18s}
+.pl:hover,.pl.on{border-color:var(--accent);color:var(--accent);background:rgba(56,189,248,.07)}
+
+.nl{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:2.75rem 2rem;text-align:center;position:relative;overflow:hidden}
+.nl::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(56,189,248,.05) 0%,transparent 70%);pointer-events:none}
+.nl h3{font-size:1.45rem;font-weight:700;margin-bottom:.45rem}
+.nl p{color:var(--text2);font-size:.88rem;margin-bottom:1.5rem;max-width:380px;margin-left:auto;margin-right:auto;line-height:1.65}
+.nlf{display:flex;gap:.7rem;max-width:400px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.nli{flex:1;min-width:190px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:.65rem 1rem;color:var(--text);font-family:var(--font);font-size:.88rem;outline:none;transition:border-color .2s}
+.nli:focus{border-color:var(--accent)}
+.nli::placeholder{color:var(--text3)}
+
+footer{border-top:1px solid var(--border);max-width:1100px;margin:0 auto;padding:3rem clamp(1rem,4vw,2.5rem) 2rem}
+.fg2{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
+@media(max-width:640px){.fg2{grid-template-columns:1fr;gap:2rem}}
+.fb p{font-size:.86rem;color:var(--text2);margin-top:.7rem;line-height:1.68;max-width:280px}
+.fc{font-size:.78rem;color:var(--text3);margin-top:.7rem}
+.fc a{color:var(--accent);text-decoration:none}
+.fl h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text);margin-bottom:.9rem}
+.fl a{display:block;font-size:.86rem;color:var(--text2);text-decoration:none;margin-bottom:.5rem;transition:color .18s}
+.fl a:hover{color:var(--accent)}
+.fbot{border-top:1px solid var(--border);padding-top:1.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;font-size:.76rem;color:var(--text3)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+@media(max-width:768px){.nav-c{display:none}.tracker::after{display:none}.vd{display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">
+    <span class="logo-sym">&lt;</span>LearnWithOOPs<span class="logo-sym">/&gt;</span>
+  </a>
+  <div class="nav-c">
+    <a href="#">Home</a>
+    <a href="#blog">Blog</a>
+    <a href="#">Learn</a>
+    <a href="#">Tools</a>
+    <a href="#">About</a>
+    <a href="#">90-Day<span class="nbadge">New</span></a>
+    <a href="#">Games</a>
+    <a href="#">Shop</a>
+  </div>
+  <div class="nav-r">
+    <button class="search-pill">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Search&nbsp;<kbd>&#8984;K</kbd>
+    </button>
+    <button class="ibtn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+    <button class="ibtn">&#9776;</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hglow"></div>
+  <div class="hdots"></div>
+  <div class="hi">
+    <div class="badge-pill">
+      <svg width="7" height="7" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="var(--accent)"/></svg>
+      Practical DevOps &amp; Cloud Knowledge
+    </div>
+    <h1>Master <span class="grad">DevOps &amp; Cloud</span><br/>Engineering</h1>
+    <p>In-depth guides on Docker, Kubernetes, AWS, CI/CD pipelines, AI/ML deployments, and modern infrastructure — written by engineers, for engineers.</p>
+    <div class="cta-r">
+      <a href="#blog" class="btn-p">Read Articles</a>
+      <a href="#topics" class="btn-o">Browse Topics</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="sn">214</div><div class="sl">Articles</div></div>
+      <div class="vd"></div>
+      <div class="stat"><div class="sn">29+</div><div class="sl">Topics</div></div>
+      <div class="vd"></div>
+      <div class="stat"><div class="sn">Free</div><div class="sl">Always</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="dv"/>
+
+<div class="sec" id="topics">
+  <p class="slbl">Explore by Topic</p>
+  <div class="chips">
+    <a class="chip" href="#">&#9881;&#65039; DevOps</a>
+    <a class="chip" href="#">&#9925; Cloud / AWS</a>
+    <a class="chip" href="#">&#128051; Docker</a>
+    <a class="chip" href="#">&#9784;&#65039; Kubernetes</a>
+    <a class="chip" href="#">&#129302; AI &amp; ML</a>
+    <a class="chip" href="#">&#128260; CI/CD</a>
+    <a class="chip" href="#">&#128203; Interview Prep</a>
+    <a class="chip" href="#">&#128196; Cheatsheets</a>
+    <a class="chip" href="#">&#128506;&#65039; Roadmap</a>
+    <a class="chip" href="#">&#128295; Tools</a>
+  </div>
+</div>
+
+<div class="sec">
+  <p class="slbl">&#128161; Daily Tip &mdash; Monday, Apr 21</p>
+  <div class="tip-wrap">
+    <div class="ttop">
+      <span class="tlbl" id="tip-tag">CI/CD</span>
+      <span id="tip-num">#45 of 65</span>
+    </div>
+    <p class="tbody" id="tip-body">Tag your Docker images with the git commit SHA, not just <code style="font-family:var(--mono);background:var(--bg3);padding:0 5px;border-radius:4px;font-size:.85em">latest</code>. <code style="font-family:var(--mono);background:var(--bg3);padding:0 5px;border-radius:4px;font-size:.85em">latest</code> makes rollbacks guesswork.</p>
+    <div class="cbox" id="tip-code"><span class="str">$</span> docker build -t myapp:<span class="cls">${{ github.sha }}</span> .</div>
+    <div class="tbar">
+      <button class="smbtn" id="copyBtn" onclick="copyTip()">Copy tip</button>
+      <button class="smbtn" onclick="shuffleTip()">Shuffle</button>
+      <span class="tcnt" id="tip-cnt">#45 of 65</span>
+    </div>
+  </div>
+</div>
+
+<hr class="dv"/>
+
+<div class="sec">
+  <div class="tracker">
+    <div class="nbdg">&#10024; New Feature</div>
+    <h3>90-Day DevOps Mastery Tracker</h3>
+    <p>Pick a learning plan, check off weekly tasks, track your streak &mdash; and share your progress. Free, no signup, saves in your browser.</p>
+    <div class="pr">
+      <span class="pl on">&#128640; Zero to DevOps Engineer</span>
+      <span class="pl">&#9889; Kubernetes Mastery</span>
+      <span class="pl">&#127919; DevOps &rarr; Cloud SDE</span>
+    </div>
+    <a href="#" class="btn-p" style="width:fit-content">Start Tracking</a>
+  </div>
+</div>
+
+<hr class="dv"/>
+
+<div class="sec" id="blog">
+  <p class="slbl">Latest Article</p>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem">
+    <h2 class="sh" style="margin-bottom:0">Featured Post</h2>
+    <a href="#" style="font-size:.83rem;color:var(--accent2);text-decoration:none;font-weight:600">All articles &rarr;</a>
+  </div>
+  <div class="fg">
+    <a class="card" href="#">
+      <div class="ctags">
+        <span class="ct sky">aws</span><span class="ct grn">kubernetes</span>
+        <span class="ct">troubleshooting</span><span class="ct">networking</span>
+        <span class="ct sky">Latest</span>
+      </div>
+      <h3 class="ct-t lg">AWS RDS Connection Timeout from EKS Pods &mdash; How to Fix It</h3>
+      <p class="ct-d">EKS pods can't connect to RDS? Fix RDS connection timeouts from Kubernetes &mdash; covers security groups, VPC peering, subnet routing, and IAM auth issues.</p>
+      <div class="cf">
+        <div class="av">LW</div>
+        <span>LearnWithOOPs</span><span class="sp">&middot;</span>
+        <span>Apr 18, 2026</span><span class="sp">&middot;</span>
+        <span>5 min read</span>
+        <span class="rl">Read article &rarr;</span>
+      </div>
+    </a>
+    <div class="ss">
+      <a class="card" href="#" style="flex:1">
+        <div class="ctags"><span class="ct">career</span><span class="ct sky">devops</span></div>
+        <h3 class="ct-t">How to Find and Land Remote DevOps Jobs in 2026</h3>
+        <p class="ct-d" style="font-size:.83rem">Platforms, resume tips, time-zone negotiation, and what companies actually hire remotely.</p>
+        <div class="cf">
+          <div class="av">LW</div><span>Apr 18, 2026</span><span class="sp">&middot;</span><span>5 min</span>
+          <span class="rl">Read &rarr;</span>
+        </div>
+      </a>
+      <a class="card" href="#" style="flex:1">
+        <div class="ctags"><span class="ct grn">terraform</span><span class="ct sky">aws</span></div>
+        <h3 class="ct-t">Terraform vs CDK vs CloudFormation: Which IaC Tool in 2026?</h3>
+        <p class="ct-d" style="font-size:.83rem">Real trade-offs, practical comparison, and which one to learn first.</p>
+        <div class="cf">
+          <div class="av">LW</div><span>Apr 18, 2026</span><span class="sp">&middot;</span><span>4 min</span>
+          <span class="rl">Read &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.25rem">
+    <h2 class="sh">Recent Articles</h2>
+    <a href="#" style="font-size:.83rem;color:var(--accent2);text-decoration:none;font-weight:600">View all &rarr;</a>
+  </div>
+  <div class="al">
+    <a class="art" href="#">
+      <div class="ctags"><span class="ct grn">terraform</span><span class="ct pur">mlops</span></div>
+      <div class="at">Use an LLM to Generate Terraform from Natural Language in 2026</div>
+      <div class="ad">Build a tool that converts plain English infrastructure descriptions into valid Terraform code using Claude AI &mdash; with validation, state awareness, and GitOps integration.</div>
+      <div class="am"><span>Apr 18, 2026</span><span class="sp">&middot;</span><span>6 min read</span><span class="sp">&middot;</span><span class="go">Read &rarr;</span></div>
+    </a>
+    <a class="art" href="#">
+      <div class="ctags"><span class="ct sky">kubernetes</span><span class="ct">monitoring</span></div>
+      <div class="at">Kubernetes Observability Stack: Prometheus + Grafana + Loki in 2026</div>
+      <div class="ad">Set up a full observability stack on Kubernetes from scratch &mdash; metrics, logs, alerts, and dashboards with production-grade configuration.</div>
+      <div class="am"><span>Apr 17, 2026</span><span class="sp">&middot;</span><span>8 min read</span><span class="sp">&middot;</span><span class="go">Read &rarr;</span></div>
+    </a>
+    <a class="art" href="#">
+      <div class="ctags"><span class="ct ora">docker</span><span class="ct sky">ci/cd</span></div>
+      <div class="at">Docker Multi-Stage Builds: Cut Your Image Size by 80%</div>
+      <div class="ad">Multi-stage builds are the single most impactful Docker optimization. This guide shows exactly how to structure them for Node.js, Python, and Go apps.</div>
+      <div class="am"><span>Apr 16, 2026</span><span class="sp">&middot;</span><span>5 min read</span><span class="sp">&middot;</span><span class="go">Read &rarr;</span></div>
+    </a>
+  </div>
+  <div style="text-align:center;margin-top:2rem">
+    <a href="#" class="btn-o">View All Articles</a>
+  </div>
+</div>
+
+<hr class="dv"/>
+
+<div class="sec">
+  <div class="nl">
+    <h3>Stay ahead of the curve</h3>
+    <p>Get the latest DevOps, Kubernetes, AWS, and AI/ML guides delivered straight to your inbox. No spam &mdash; just practical engineering content.</p>
+    <div class="nlf">
+      <input class="nli" type="email" placeholder="your@email.com"/>
+      <button class="btn-p">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fg2">
+    <div class="fb">
+      <a class="logo" href="#" style="font-size:.95rem">
+        <span class="logo-sym">&lt;</span>LearnWithOOPs<span class="logo-sym">/&gt;</span>
+      </a>
+      <p>Practical guides on DevOps, Cloud, Docker, Kubernetes, AWS, and AI/ML. Real engineering knowledge, clearly explained.</p>
+      <p class="fc">Contact: <a href="mailto:hello@learnwithoops.dev">hello@learnwithoops.dev</a></p>
+    </div>
+    <div class="fl">
+      <h4>Quick Links</h4>
+      <a href="#">All Articles</a>
+      <a href="#">Cheatsheets</a>
+      <a href="#">Interview Prep</a>
+      <a href="#">DevOps Roadmap</a>
+      <a href="#">Tools &amp; Resources</a>
+      <a href="#">About</a>
+      <a href="#">RSS Feed</a>
+    </div>
+    <div class="fl">
+      <h4>Topics</h4>
+      <a href="#">DevOps</a>
+      <a href="#">Docker</a>
+      <a href="#">Kubernetes</a>
+      <a href="#">AWS</a>
+      <a href="#">CI/CD</a>
+      <a href="#">AI &amp; ML</a>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>&copy; 2026 LearnWithOOPs. All rights reserved.</span>
+    <span>Built with Next.js &amp; Tailwind CSS</span>
+  </div>
+</footer>
+
+<script>
+function toggleTheme(){
+  const d=document.documentElement;
+  const dark=d.dataset.theme==='dark';
+  d.dataset.theme=dark?'light':'dark';
+  document.getElementById('themeBtn').textContent=dark?'☀️':'🌙';
+}
+document.querySelectorAll('.pl').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('.pl').forEach(x=>x.classList.remove('on'));
+    p.classList.add('on');
+  });
+});
+const TIPS=[
+  {tag:'CI/CD',num:'#45 of 65',
+   body:`Tag your Docker images with the git commit SHA, not just <code style="font-family:var(--mono);background:var(--bg3);padding:0 5px;border-radius:4px;font-size:.85em">latest</code>. <code style="font-family:var(--mono);background:var(--bg3);padding:0 5px;border-radius:4px;font-size:.85em">latest</code> makes rollbacks guesswork.`,
+   code:`<span class="str">$</span> docker build -t myapp:<span class="cls">\${{ github.sha }}</span> .`},
+  {tag:'Kubernetes',num:'#12 of 65',
+   body:`Always set resource <strong>requests</strong> and <strong>limits</strong> on your pods. Without them, a single noisy neighbour can starve the entire node.`,
+   code:`<span class="kw">resources:</span>\n  <span class="kw">requests:</span>\n    memory: <span class="str">"128Mi"</span>  cpu: <span class="str">"250m"</span>\n  <span class="kw">limits:</span>\n    memory: <span class="str">"256Mi"</span>  cpu: <span class="str">"500m"</span>`},
+  {tag:'AWS',num:'#28 of 65',
+   body:`Use <strong>IAM roles for service accounts (IRSA)</strong> in EKS instead of storing AWS credentials as Kubernetes secrets. It's safer and rotates automatically.`,
+   code:`<span class="str">$</span> eksctl create iamserviceaccount \\\n    --name <span class="cls">my-sa</span> --namespace <span class="cls">default</span> \\\n    --cluster <span class="cls">my-cluster</span> \\\n    --attach-policy-arn <span class="str">arn:aws:iam::aws:policy/AmazonS3ReadOnly</span>`},
+  {tag:'Docker',num:'#7 of 65',
+   body:`Add a <strong>.dockerignore</strong> file to every project. Excluding <code style="font-family:var(--mono);background:var(--bg3);padding:0 5px;border-radius:4px;font-size:.85em">node_modules</code> and <code style="font-family:var(--mono);background:var(--bg3);padding:0 5px;border-radius:4px;font-size:.85em">.git</code> keeps your build context tiny and fast.`,
+   code:`<span class="cm"># .dockerignore</span>\nnode_modules\n.git\n*.log\ndist\n.env`}
+];
+let idx=0;
+function shuffleTip(){
+  idx=(idx+1)%TIPS.length;
+  const t=TIPS[idx];
+  document.getElementById('tip-tag').textContent=t.tag;
+  document.getElementById('tip-num').textContent=t.num;
+  document.getElementById('tip-body').innerHTML=t.body;
+  document.getElementById('tip-code').innerHTML=t.code;
+  document.getElementById('tip-cnt').textContent=t.num;
+  document.getElementById('copyBtn').textContent='Copy tip';
+}
+function copyTip(){
+  navigator.clipboard.writeText(document.getElementById('tip-code').innerText).then(()=>{
+    document.getElementById('copyBtn').textContent='Copied!';
+    setTimeout(()=>document.getElementById('copyBtn').textContent='Copy tip',2000);
+  });
+}
+</script>
+</body>
+</html>
